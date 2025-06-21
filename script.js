@@ -291,3 +291,20 @@ printStyles.textContent = `
     }
 `;
 document.head.appendChild(printStyles);
+
+// Form submission function from POC
+function prepareForm() {
+    const timestamp = new Date().toLocaleString();
+    const uniqueSubject = "New Contact Form Submission - " + timestamp;
+    document.getElementById('dynamicSubject').value = uniqueSubject;
+
+    setTimeout(() => {
+        document.getElementById('contact-form').reset();
+        document.getElementById('successMessage').style.display = 'block';
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+            document.getElementById('successMessage').style.display = 'none';
+        }, 5000);
+    }, 1000);
+}
