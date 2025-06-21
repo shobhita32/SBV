@@ -139,6 +139,7 @@ p {
     font-weight: 500;
     transition: var(--transition);
     position: relative;
+    outline: none;
 }
 
 .nav-link:hover,
@@ -146,20 +147,8 @@ p {
     color: var(--dark-gold);
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--accent-gold);
-    transition: var(--transition);
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
+.nav-link:focus {
+    outline: none;
 }
 
 .hamburger {
@@ -220,7 +209,7 @@ p {
     width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: var(--shadow-hover);
+    box-shadow: none;
 }
 
 /* About Section */
@@ -282,7 +271,7 @@ p {
     width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: var(--shadow);
+    box-shadow: none;
 }
 
 /* Section Titles */
@@ -326,19 +315,51 @@ p {
     border-color: var(--accent-gold);
 }
 
+.service-card .service-icon,
+.service-card .service-link {
+    text-align: left;
+}
+
+.service-card h3 {
+    text-align: left;
+    color: var(--primary-black);
+    margin-bottom: 1rem;
+}
+
 .service-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.service-card h3 {
-    color: var(--primary-black);
+.service-card p {
     margin-bottom: 1rem;
+    color: var(--text-gray);
 }
 
-.service-card p {
+.service-card ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--text-gray);
-    margin-bottom: 1.5rem;
+    text-align: left !important;
+}
+
+.service-card ul li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    text-align: left !important;
+}
+
+.service-card ul ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    list-style-type: circle;
+    text-align: left !important;
+}
+
+.service-card ul ul li {
+    margin-bottom: 0.25rem;
+    text-align: left !important;
 }
 
 .service-link {
@@ -346,6 +367,7 @@ p {
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
+    text-align: left;
 }
 
 .service-link:hover {
@@ -454,7 +476,6 @@ p {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-gold);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
 }
 
 .contact-info h3 {
@@ -530,10 +551,15 @@ p {
     color: var(--primary-white);
     text-decoration: none;
     transition: var(--transition);
+    outline: none;
 }
 
 .footer-section ul li a:hover {
     color: var(--accent-gold);
+}
+
+.footer-section ul li a:focus {
+    outline: none;
 }
 
 .footer-bottom {
