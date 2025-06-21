@@ -19,8 +19,8 @@
                 </div>
                 <div class="nav-menu" id="nav-menu">
                     <a href="#home" class="nav-link active">Home</a>
-                    <a href="#team" class="nav-link">Our Team</a>
                     <a href="#services" class="nav-link">Services</a>
+                    <a href="#team" class="nav-link">Our Team</a>
                     <a href="#contact" class="nav-link">Contact Us</a>
                 </div>
                 <div class="hamburger" id="hamburger">
@@ -53,7 +53,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>Trusted Legal Counsel Since 1996</h2>
-                    <p>SBV Associates stands as a beacon of legal excellence, combining decades of experience with innovative approaches to serve our clients’ diverse needs across India. Our commitment to justice and client advocacy has earned us recognition as one of the region’s premier law firms, trusted by individuals and body corporates.
+                    <p>SBV Associates stands as a beacon of legal excellence, combining decades of experience with innovative approaches to serve our clients' diverse needs across India. Our commitment to justice and client advocacy has earned us recognition as one of the region's premier law firms, trusted by individuals and body corporates.
 
                     <div class="trust-indicators">
                         <div class="indicator">
@@ -86,44 +86,50 @@
                 <div class="service-card">
                     <div class="service-icon">⚖️</div>
                     <h3>Litigation</h3>
-                    <p> <li>Civil</li>
+                    <ul>
+                        <li>Civil</li>
                         <li>Criminal</li>
                         <li>Arbitration</li>
                         <li>Matrimonial</li>
                         <li>Consumer</li>
                         <li>Intellectual Properties</li>
-                        <li>Tribunals: </li>
-                        KAT
-                        DRT
-                        NCLT
-                        RERA
-                        CAT
-                        <li></li>Department Appeals</li>
+                        <li>Tribunals: 
+                            <ul>
+                                <li>KAT</li>
+                                <li>DRT</li>
+                                <li>NCLT</li>
+                                <li>RERA</li>
+                                <li>CAT</li>
+                            </ul>
+                        </li>
+                        <li>Department Appeals</li>
                         <li>POSH</li>
-                        </p>
+                    </ul>
                     <a href="#contact" class="service-link">Learn More</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🏢</div>
-                    <h3>Non-litigation</h3> <li>Agreements/Deeds</li>
-                    <li>Registration</li>
-                    <li>Legal Due Diligence</li>
-                    <li>Contracts</li>
-                    
-                    <p></p>
+                    <h3>Non-litigation</h3>
+                    <ul>
+                        <li>Agreements/Deeds</li>
+                        <li>Registration</li>
+                        <li>Legal Due Diligence</li>
+                        <li>Contracts</li>
+                    </ul>
                     <a href="#contact" class="service-link">Learn More</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🏠</div>
                     <h3>Consultation</h3>
-                    <p> <li>Incorporation</li>
+                    <ul>
+                        <li>Incorporation</li>
                         <li>LLP</li>
                         <li>Pvt. Ltd.</li>
                         <li>Partnership</li>
                         <li>Trust</li>
                         <li>Compliance and filings</li>
                         <li>FEMA</li>
-                        </p>
+                    </ul>
                     <a href="#contact" class="service-link">Learn More</a>
                 </div>
                 <!-- <div class="service-card">
@@ -174,7 +180,7 @@
                         <h3>Siddharth B Vasan</h3>
                         <p class="team-title"></p>
                         <div class="team-details">
-                            <p>A “startup guy” and a legal professional, having been among the founding members of 2 startups. He possesses a unique combination of Fintech and Legal expertise, leveraging his knowledge in the domains pertaining to Intellectual Property Rights, SEBI, Banking and Compliance. He is also serving as a Non-Executive Director of a Fintech company.
+                            <p>A "startup guy" and a legal professional, having been among the founding members of 2 startups. He possesses a unique combination of Fintech and Legal expertise, leveraging his knowledge in the domains pertaining to Intellectual Property Rights, SEBI, Banking and Compliance. He is also serving as a Non-Executive Director of a Fintech company.
                             </p>
                         </div>
                     </div>
@@ -204,7 +210,7 @@
             <p class="section-subtitle">Ready to discuss your legal needs? We're here to help.</p>
             <div class="contact-content">
                 <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contact-form">
+                    <form class="contact-form" id="contact-form" action="https://formsubmit.co/vishwaska1019@gmail.com" method="POST" target="hidden_iframe" onsubmit="prepareForm()">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -234,8 +240,17 @@
                             <label for="message">Message / Case Details *</label>
                             <textarea id="message" name="message" rows="5" required placeholder="Please provide details about your legal matter..."></textarea>
                         </div>
+                        
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" id="dynamicSubject" value="">
+                        
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
+                    
+                    <div id="successMessage" class="success-message" style="display: none;">✅ Form submitted successfully!</div>
+                    
+                    <iframe name="hidden_iframe" style="display:none;"></iframe>
                 </div>
                 <div class="contact-info">
                     <div class="contact-details">
