@@ -362,12 +362,24 @@ p {
     text-align: left !important;
 }
 
+.service-card .service-link {
+    text-align: left !important;
+    display: inline-block;
+}
+
+.service-card a.service-link {
+    text-align: left !important;
+    display: inline-block;
+    float: left;
+}
+
 .service-link {
     color: var(--dark-gold);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
-    text-align: left;
+    text-align: left !important;
+    display: inline-block;
 }
 
 .service-link:hover {
