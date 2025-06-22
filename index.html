@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sterling & Associates - Premier Law Firm</title>
-    <meta name="description" content="Sterling & Associates - Professional legal services with over 25 years of experience. Specializing in Personal Injury, Non-litigation, Real Estate, and Family Law.">
+    <title>SBV Associates</title>
+    <meta name="description" content="SBV Associates stands as a beacon of legal excellence, combining decades of experience with innovative approaches to serve our clients' diverse needs across India. Our commitment to justice and client advocacy has earned us recognition as one of the region's premier law firms, trusted by individuals and body corporates.">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -14,8 +14,10 @@
         <nav class="nav">
             <div class="nav-container">
                 <div class="logo">
-                    <h1>SBV Associates </h1>
-                    <p>Advocates | Consultants</p>
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <h1>SBV Associates </h1>
+                        <p>Advocates | Consultants</p>
+                    </a>
                 </div>
                 <div class="nav-menu" id="nav-menu">
                     <a href="#home" class="nav-link active">Home</a>
@@ -36,7 +38,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Excellence in Legal Representation</h1>
-            <p class="hero-subtitle">For over 25 years, Sterling & Associates has provided trusted legal counsel with unwavering dedication to our clients' success.</p>
+            <p class="hero-subtitle">For over 25 years, SBV Associates has provided trusted legal counsel with unwavering dedication to our clients' success.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">Free Consultation</a>
                 <a href="#services" class="btn btn-secondary">Our Services</a>
@@ -122,11 +124,12 @@
                     <div class="service-icon">🏠</div>
                     <h3>Consultation</h3>
                     <ul>
-                        <li>Incorporation</li>
+                        <li>Incorporation
+                            <ul>
                         <li>LLP</li>
                         <li>Pvt. Ltd.</li>
                         <li>Partnership</li>
-                        <li>Trust</li>
+                        <li>Trust</li> </ul> </li>
                         <li>Compliance and filings</li>
                         <li>FEMA</li>
                     </ul>
@@ -157,7 +160,7 @@
     <!-- Team Section -->
     <section id="team" class="team">
         <div class="container">
-            <h2 class="section-title">Our Experienced Team</h2>
+            <h2 class="section-title">Our Team</h2>
             <p class="section-subtitle">Meet the attorneys dedicated to your success</p>
             <div class="team-grid">
                 <div class="team-card">
@@ -185,10 +188,12 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="team-card">
                     <!-- <div class="team-image">
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="David Chen, Associate Attorney">
                     </div> -->
+                    
                     <div class="team-info">
                         <h3>Dinesh Jain                        </h3>
                         <p class="team-title"></p>
@@ -210,6 +215,15 @@
             <p class="section-subtitle">Ready to discuss your legal needs? We're here to help.</p>
             <div class="contact-content">
                 <div class="contact-form-wrapper">
+                    <!-- 
+                    Alternative email services if FormSubmit.co doesn't work:
+                    1. https://formspree.io/f/YOUR_FORM_ID
+                    2. https://getform.io/f/YOUR_FORM_ID
+                    3. https://web3forms.com/access/YOUR_ACCESS_KEY
+                    
+                    IMPORTANT: Submit this form once to activate FormSubmit.co
+                    Check your email (vishwaska1019@gmail.com) for activation link
+                    -->
                     <form class="contact-form" id="contact-form" action="https://formsubmit.co/vishwaska1019@gmail.com" method="POST" target="hidden_iframe" onsubmit="prepareForm()">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
@@ -230,9 +244,6 @@
                                 <option value="Litigation">Litigation</option>
                                 <option value="corporate-law">Non-litigation</option>
                                 <option value="real-estate">Consultation</option>
-                                <option value="family-law">Family Law</option>
-                                <option value="criminal-defense">Criminal Defense</option>
-                                <option value="estate-planning">Estate Planning</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -244,13 +255,20 @@
                         <!-- Hidden fields -->
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_subject" id="dynamicSubject" value="">
+                        <input type="hidden" name="_next" value="">
+                        
+                        <!-- Alternative: Use Web3Forms (no activation required)
+                        Change action to: https://web3forms.com/access/YOUR_ACCESS_KEY
+                        Get access key from: https://web3forms.com/
+                        -->
                         
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
                     
                     <div id="successMessage" class="success-message" style="display: none;">✅ Form submitted successfully!</div>
+                    <div id="errorMessage" class="error-message" style="display: none;">❌ There was an error submitting the form. Please try again.</div>
                     
-                    <iframe name="hidden_iframe" style="display:none;"></iframe>
+                    <iframe name="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
                 </div>
                 <div class="contact-info">
                     <div class="contact-details">
@@ -294,10 +312,10 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="logo">
-                        <h3>Sterling & Associates</h3>
-                        <p>Attorneys at Law</p>
+                        <h3>SBV Associates</h3> 
+                        <p>Advocates | Consultants</p>
                     </div>
-                    <p>Excellence in legal representation for over 25 years.</p>
+                    <p>Excellence in legal representation for over 29 years.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -325,7 +343,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Sterling & Associates. All rights reserved.</p>
+                <p>&copy; 2025 SBV Associates. All rights reserved.</p>
                 <p>This website is for informational purposes only and does not constitute legal advice.</p>
             </div>
         </div>
