@@ -294,17 +294,51 @@ document.head.appendChild(printStyles);
 
 // Form submission function from POC
 function prepareForm() {
+    console.log('prepareForm() called - starting form submission');
+    
     const timestamp = new Date().toLocaleString();
     const uniqueSubject = "New Contact Form Submission - " + timestamp;
     document.getElementById('dynamicSubject').value = uniqueSubject;
+    
+    console.log('Dynamic subject set:', uniqueSubject);
 
+    // Show loading state
+    const submitButton = document.querySelector('#contact-form button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+
+    // Set a timeout to handle potential issues
     setTimeout(() => {
-        document.getElementById('contact-form').reset();
-        document.getElementById('successMessage').style.display = 'block';
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
         
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-            document.getElementById('successMessage').style.display = 'none';
-        }, 5000);
-    }, 1000);
+        // Check if form was actually submitted
+        const form = document.getElementById('contact-form');
+        console.log('Form validity check:', form.checkValidity());
+        
+        if (form.checkValidity()) {
+            console.log('Form is valid, showing success message');
+            document.getElementById('contact-form').reset();
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        } else {
+            console.log('Form validation failed, showing error message');
+            document.getElementById('errorMessage').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 5000);
+        }
+    }, 2000);
+}
+
+// Handle form response
+function handleFormResponse() {
+    console.log('Form response received - iframe loaded');
+    // This function will be called when the iframe loads
+    // You can add additional logging here
 }
