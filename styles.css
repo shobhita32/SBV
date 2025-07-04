@@ -261,7 +261,7 @@ p {
 
 /* About Section */
 .about {
-    padding: 80px 0;
+    padding: 60px 0;
     background-color: var(--light-gray);
 }
 
@@ -337,7 +337,7 @@ p {
 
 /* Services Section */
 .services {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
 .services-grid {
@@ -435,7 +435,7 @@ p {
 
 /* Team Section */
 .team {
-    padding: 80px 0;
+    padding: 60px 0;
     background-color: var(--light-gray);
 }
 
