@@ -188,36 +188,37 @@ function clearErrorMessages() {
     errorFields.forEach(field => field.classList.remove('error'));
 }
 
-// Show success/error messages
-function showMessage(message, type) {
-    // Remove existing messages
-    const existingMessages = document.querySelectorAll('.success-message, .error-message-global');
-    existingMessages.forEach(msg => msg.remove());
-    const messageDiv = document.createElement('div');
-    messageDiv.className = type === 'success' ? 'success-message' : 'error-message-global';
-    messageDiv.textContent = message;
-    // Style the message
-    messageDiv.style.padding = '15px';
-    messageDiv.style.marginBottom = '20px';
-    messageDiv.style.borderRadius = '5px';
-    messageDiv.style.fontWeight = 'bold';
-    if (type === 'success') {
-        messageDiv.style.backgroundColor = '#d4edda';
-        messageDiv.style.color = '#155724';
-        messageDiv.style.border = '1px solid #c3e6cb';
-    } else {
-        messageDiv.style.backgroundColor = '#f8d7da';
-        messageDiv.style.color = '#721c24';
-        messageDiv.style.border = '1px solid #f5c6cb';
-    }
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.insertBefore(messageDiv, form.firstChild);
-    }
-    // Remove message after 5 seconds
+// Show success/error messages as popup
+function showPopupMessage(message, type) {
+    // Remove any existing popup
+    const existingPopup = document.getElementById('form-popup-message');
+    if (existingPopup) existingPopup.remove();
+    // Create popup container
+    const popup = document.createElement('div');
+    popup.id = 'form-popup-message';
+    popup.textContent = message;
+    popup.style.position = 'fixed';
+    popup.style.top = '30px';
+    popup.style.left = '50%';
+    popup.style.transform = 'translateX(-50%)';
+    popup.style.zIndex = '9999';
+    popup.style.padding = '18px 32px';
+    popup.style.borderRadius = '8px';
+    popup.style.fontWeight = 'bold';
+    popup.style.fontSize = '1.1rem';
+    popup.style.boxShadow = '0 4px 24px rgba(0,0,0,0.13)';
+    popup.style.backgroundColor = type === 'success' ? '#d4edda' : '#f8d7da';
+    popup.style.color = type === 'success' ? '#155724' : '#721c24';
+    popup.style.border = type === 'success' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+    document.body.appendChild(popup);
     setTimeout(() => {
-        messageDiv.remove();
-    }, 5000);
+        popup.remove();
+    }, 4000);
+}
+
+// Override showMessage to use popup
+function showMessage(message, type) {
+    showPopupMessage(message, type);
 }
 
 // Intersection Observer for animations
