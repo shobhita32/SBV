@@ -129,14 +129,14 @@ p {
 }
 
 .logo h1 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     color: var(--primary-black);
     margin-bottom: 0;
     margin-left: 0;
 }
 
 .logo h3 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--accent-gold);
     margin-bottom: 0;
     margin-left: 0;
@@ -151,7 +151,7 @@ p {
 }
 
 .logo-image {
-    height: 40px;
+    height: 60px;
     width: auto;
     margin-right: 10px;
     vertical-align: middle;
@@ -680,10 +680,19 @@ p {
         transition: var(--transition);
         box-shadow: var(--shadow);
         padding: 2rem 0;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
     }
     
     .nav-menu.active {
         left: 0;
+    }
+    
+    /* Improve footer link styling for mobile */
+    .footer-section ul li a {
+        display: block;
+        padding: 8px 0;
+        font-size: 1rem;
     }
     
     .hero {
@@ -713,6 +722,12 @@ p {
         grid-template-columns: 1fr;
     }
     
+    /* Ensure services section has proper spacing on mobile */
+    .services {
+        padding-top: 100px;
+        margin-top: -20px;
+    }
+    
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -728,13 +743,13 @@ p {
     }
     
     .logo-image {
-        height: 30px;
+        height: 45px;
         margin-right: 8px;
     }
     
-    h1 { font-size: 2rem; }
+    h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
-    h3 { font-size: 1.3rem; }
+    h3 { font-size: 1.5rem; }
 }
 
 @media (max-width: 480px) {
