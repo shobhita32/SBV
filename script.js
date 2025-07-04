@@ -23,14 +23,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const headerOffset = 80;
+            // Adjust offset based on screen size and mobile menu state
+            let headerOffset = 80;
+            
+            // Check if mobile menu is active and adjust offset
+            const navMenu = document.getElementById('nav-menu');
+            const isMobile = window.innerWidth <= 768;
+            const isMenuActive = navMenu.classList.contains('active');
+            
+            if (isMobile && isMenuActive) {
+                // Close mobile menu first
+                navMenu.classList.remove('active');
+                document.getElementById('hamburger').classList.remove('active');
+                
+                // Add extra offset for mobile to account for menu transition
+                headerOffset = 100;
+            } else if (isMobile) {
+                // Mobile without active menu
+                headerOffset = 90;
+            }
+            
             const elementPosition = target.offsetTop;
             const offsetPosition = elementPosition - headerOffset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            // Add a small delay for mobile to ensure menu closes before scrolling
+            const scrollDelay = (isMobile && isMenuActive) ? 300 : 0;
+            
+            setTimeout(() => {
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }, scrollDelay);
         }
     });
 });
@@ -59,46 +83,65 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Contact Form Handling
+// Contact Form Handling - Production Version
 const contactForm = document.getElementById('contact-form');
 
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(this);
-    const formObject = {};
-    
-    formData.forEach((value, key) => {
-        formObject[key] = value;
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        // Get form data
+        const formData = new FormData(this);
+        const formObject = {};
+        formData.forEach((value, key) => {
+            formObject[key] = value;
+        });
+
+        // Basic form validation
+        if (validateForm(formObject)) {
+            // Set dynamic subject if element exists
+            const dynamicSubject = document.getElementById('dynamicSubject');
+            if (dynamicSubject) {
+                const timestamp = new Date().toLocaleString();
+                dynamicSubject.value = "New Contact Form Submission - " + timestamp;
+            }
+
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.textContent = 'Sending...';
+                submitButton.disabled = true;
+            }
+
+            // If this is a real form submission (has action attribute), allow it
+            if (this.hasAttribute('action') && this.getAttribute('action')) {
+                // Let the form submit naturally
+                return true;
+            } else {
+                // Demo mode - prevent default and show success message
+                e.preventDefault();
+                showMessage('Thank you for your message! We will contact you within 24 hours.', 'success');
+                contactForm.reset();
+                if (submitButton) {
+                    submitButton.textContent = 'Send Message';
+                    submitButton.disabled = false;
+                }
+            }
+        } else {
+            // Validation failed
+            e.preventDefault();
+            showMessage('Please fix the errors above and try again.', 'error');
+        }
     });
-    
-    // Basic form validation
-    if (validateForm(formObject)) {
-        // Show success message
-        showMessage('Thank you for your message! We will contact you within 24 hours.', 'success');
-        
-        // Reset form
-        contactForm.reset();
-        
-        // In a real application, you would send the data to a server
-        console.log('Form submitted:', formObject);
-    }
-});
+}
 
 // Form validation function
 function validateForm(data) {
     let isValid = true;
-    
-    // Clear previous error messages
     clearErrorMessages();
-    
-    // Validate required fields
+
     if (!data.name || data.name.trim() === '') {
         showFieldError('name', 'Full name is required');
         isValid = false;
     }
-    
     if (!data.email || data.email.trim() === '') {
         showFieldError('email', 'Email address is required');
         isValid = false;
@@ -106,12 +149,10 @@ function validateForm(data) {
         showFieldError('email', 'Please enter a valid email address');
         isValid = false;
     }
-    
     if (!data.message || data.message.trim() === '') {
         showFieldError('message', 'Message is required');
         isValid = false;
     }
-    
     return isValid;
 }
 
@@ -124,14 +165,18 @@ function isValidEmail(email) {
 // Show field error
 function showFieldError(fieldName, message) {
     const field = document.getElementById(fieldName);
+    if (!field) return;
     const formGroup = field.parentElement;
-    
     field.classList.add('error');
-    
+    // Remove existing error message for this field
+    const existingError = formGroup.querySelector('.error-message');
+    if (existingError) existingError.remove();
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
     errorDiv.textContent = message;
-    
+    errorDiv.style.color = 'red';
+    errorDiv.style.fontSize = '0.9em';
+    errorDiv.style.marginTop = '5px';
     formGroup.appendChild(errorDiv);
 }
 
@@ -139,20 +184,36 @@ function showFieldError(fieldName, message) {
 function clearErrorMessages() {
     const errorMessages = document.querySelectorAll('.error-message');
     const errorFields = document.querySelectorAll('.error');
-    
     errorMessages.forEach(msg => msg.remove());
     errorFields.forEach(field => field.classList.remove('error'));
 }
 
 // Show success/error messages
 function showMessage(message, type) {
+    // Remove existing messages
+    const existingMessages = document.querySelectorAll('.success-message, .error-message-global');
+    existingMessages.forEach(msg => msg.remove());
     const messageDiv = document.createElement('div');
-    messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+    messageDiv.className = type === 'success' ? 'success-message' : 'error-message-global';
     messageDiv.textContent = message;
-    
+    // Style the message
+    messageDiv.style.padding = '15px';
+    messageDiv.style.marginBottom = '20px';
+    messageDiv.style.borderRadius = '5px';
+    messageDiv.style.fontWeight = 'bold';
+    if (type === 'success') {
+        messageDiv.style.backgroundColor = '#d4edda';
+        messageDiv.style.color = '#155724';
+        messageDiv.style.border = '1px solid #c3e6cb';
+    } else {
+        messageDiv.style.backgroundColor = '#f8d7da';
+        messageDiv.style.color = '#721c24';
+        messageDiv.style.border = '1px solid #f5c6cb';
+    }
     const form = document.getElementById('contact-form');
-    form.insertBefore(messageDiv, form.firstChild);
-    
+    if (form) {
+        form.insertBefore(messageDiv, form.firstChild);
+    }
     // Remove message after 5 seconds
     setTimeout(() => {
         messageDiv.remove();
