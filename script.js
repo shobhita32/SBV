@@ -83,55 +83,8 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Contact Form Handling - Production Version
-const contactForm = document.getElementById('contact-form');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        // Get form data
-        const formData = new FormData(this);
-        const formObject = {};
-        formData.forEach((value, key) => {
-            formObject[key] = value;
-        });
-
-        // Basic form validation
-        if (validateForm(formObject)) {
-            // Set dynamic subject if element exists
-            const dynamicSubject = document.getElementById('dynamicSubject');
-            if (dynamicSubject) {
-                const timestamp = new Date().toLocaleString();
-                dynamicSubject.value = "New Contact Form Submission - " + timestamp;
-            }
-
-            // Show loading state
-            const submitButton = this.querySelector('button[type="submit"]');
-            if (submitButton) {
-                submitButton.textContent = 'Sending...';
-                submitButton.disabled = true;
-            }
-
-            // If this is a real form submission (has action attribute), allow it
-            if (this.hasAttribute('action') && this.getAttribute('action')) {
-                // Let the form submit naturally
-                return true;
-            } else {
-                // Demo mode - prevent default and show success message
-                e.preventDefault();
-                showMessage('Thank you for your message! We will contact you within 24 hours.', 'success');
-                contactForm.reset();
-                if (submitButton) {
-                    submitButton.textContent = 'Send Message';
-                    submitButton.disabled = false;
-                }
-            }
-        } else {
-            // Validation failed
-            e.preventDefault();
-            showMessage('Please fix the errors above and try again.', 'error');
-        }
-    });
-}
+// Contact Form Handling - Now handled by handleFormSubmission function
+// The form uses onsubmit="handleFormSubmission(event)" instead of event listeners
 
 // Form validation function
 function validateForm(data) {
@@ -354,48 +307,11 @@ printStyles.textContent = `
 `;
 document.head.appendChild(printStyles);
 
-// Form submission function from POC
+// Form submission function - replaced by handleFormSubmission
+// This function is kept for backward compatibility but not used
 function prepareForm() {
-    console.log('prepareForm() called - starting form submission');
-    
-    const timestamp = new Date().toLocaleString();
-    const uniqueSubject = "New Contact Form Submission - " + timestamp;
-    document.getElementById('dynamicSubject').value = uniqueSubject;
-    
-    console.log('Dynamic subject set:', uniqueSubject);
-
-    // Show loading state
-    const submitButton = document.querySelector('#contact-form button[type="submit"]');
-    const originalText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-
-    // Set a timeout to handle potential issues
-    setTimeout(() => {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-        
-        // Check if form was actually submitted
-        const form = document.getElementById('contact-form');
-        console.log('Form validity check:', form.checkValidity());
-        
-        if (form.checkValidity()) {
-            console.log('Form is valid, showing success message');
-            document.getElementById('contact-form').reset();
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-        } else {
-            console.log('Form validation failed, showing error message');
-            document.getElementById('errorMessage').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('errorMessage').style.display = 'none';
-            }, 5000);
-        }
-    }, 2000);
+    console.log('prepareForm() called - but using handleFormSubmission instead');
+    // This function is deprecated - use handleFormSubmission instead
 }
 
 // Handle form response
@@ -403,4 +319,51 @@ function handleFormResponse() {
     console.log('Form response received - iframe loaded');
     // This function will be called when the iframe loads
     // You can add additional logging here
+}
+
+// New function to handle form submission and redirect
+function handleFormSubmission(event) {
+    event.preventDefault();
+    
+    console.log('handleFormSubmission() called - starting form submission');
+    
+    // Get form data
+    const form = event.target;
+    const formData = new FormData(form);
+    const formObject = {};
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+
+    // Basic form validation
+    if (validateForm(formObject)) {
+        // Set dynamic subject
+        const dynamicSubject = document.getElementById('dynamicSubject');
+        if (dynamicSubject) {
+            const timestamp = new Date().toLocaleString();
+            dynamicSubject.value = "New Contact Form Submission - " + timestamp;
+        }
+
+        // Show loading state
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+
+        // Simulate form submission (in real implementation, you'd send to server)
+        setTimeout(() => {
+            // Reset button
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+            
+            // Reset form
+            form.reset();
+            
+            // Redirect to status page with success parameter
+            window.location.href = 'form-status.html?status=success';
+        }, 2000);
+    } else {
+        // Validation failed
+        showMessage('Please fix the errors above and try again.', 'error');
+    }
 }
