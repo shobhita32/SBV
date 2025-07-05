@@ -86,29 +86,8 @@ window.addEventListener('scroll', () => {
 // Contact Form Handling - Now handled by handleFormSubmission function
 // The form uses onsubmit="handleFormSubmission(event)" instead of event listeners
 
-// Contact Form Handling for FormSubmit.co
-const contactForm = document.getElementById('contact-form');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        // Set dynamic subject
-        const dynamicSubject = document.getElementById('dynamicSubject');
-        if (dynamicSubject) {
-            const timestamp = new Date().toLocaleString();
-            dynamicSubject.value = "New Contact Form Submission - " + timestamp;
-        }
-
-        // Show loading state
-        const submitButton = this.querySelector('button[type="submit"]');
-        if (submitButton) {
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-        }
-
-        // Let the form submit to FormSubmit.co
-        return true;
-    });
-}
+// Contact Form Handling - Now using prepareFormSubmit() function via onsubmit
+// The form uses onsubmit="prepareFormSubmit()" to handle FormSubmit.co properly
 
 // Form validation function
 function validateForm(data) {
@@ -336,6 +315,46 @@ document.head.appendChild(printStyles);
 function prepareForm() {
     console.log('prepareForm() called - but using handleFormSubmission instead');
     // This function is deprecated - use handleFormSubmission instead
+}
+
+// Prepare FormSubmit with dynamic redirect URL
+function prepareFormSubmit() {
+    console.log('prepareFormSubmit() called - setting up FormSubmit redirect');
+    
+    // Set dynamic subject
+    const dynamicSubject = document.getElementById('dynamicSubject');
+    if (dynamicSubject) {
+        const timestamp = new Date().toLocaleString();
+        dynamicSubject.value = "New Contact Form Submission - " + timestamp;
+    }
+    
+    // Set dynamic redirect URL
+    const redirectUrl = document.getElementById('redirectUrl');
+    if (redirectUrl) {
+        // Get current domain and protocol
+        const currentUrl = window.location.href;
+        const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+        const redirectPath = baseUrl + '/form-status.html?status=success';
+        
+        // OPTIONAL: Override with your production URL when deployed
+        // Uncomment and replace with your actual domain:
+        // if (window.location.hostname !== 'localhost') {
+        //     redirectPath = 'https://yourdomain.com/form-status.html?status=success';
+        // }
+        
+        redirectUrl.value = redirectPath;
+        console.log('Redirect URL set to:', redirectPath);
+    }
+    
+    // Show loading state
+    const submitButton = document.querySelector('#contact-form button[type="submit"]');
+    if (submitButton) {
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+    }
+    
+    console.log('FormSubmit prepared - allowing form submission');
+    return true;
 }
 
 // Handle form response
