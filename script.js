@@ -86,6 +86,30 @@ window.addEventListener('scroll', () => {
 // Contact Form Handling - Now handled by handleFormSubmission function
 // The form uses onsubmit="handleFormSubmission(event)" instead of event listeners
 
+// Contact Form Handling for FormSubmit.co
+const contactForm = document.getElementById('contact-form');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        // Set dynamic subject
+        const dynamicSubject = document.getElementById('dynamicSubject');
+        if (dynamicSubject) {
+            const timestamp = new Date().toLocaleString();
+            dynamicSubject.value = "New Contact Form Submission - " + timestamp;
+        }
+
+        // Show loading state
+        const submitButton = this.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+        }
+
+        // Let the form submit to FormSubmit.co
+        return true;
+    });
+}
+
 // Form validation function
 function validateForm(data) {
     let isValid = true;
@@ -317,8 +341,21 @@ function prepareForm() {
 // Handle form response
 function handleFormResponse() {
     console.log('Form response received - iframe loaded');
-    // This function will be called when the iframe loads
-    // You can add additional logging here
+    
+    // Reset button state
+    const submitButton = document.querySelector('#contact-form button[type="submit"]');
+    if (submitButton) {
+        submitButton.textContent = 'Send Message';
+        submitButton.disabled = false;
+    }
+    
+    // Reset form
+    const form = document.getElementById('contact-form');
+    if (form) {
+        form.reset();
+    }
+    
+    // The redirect to form-status.html will happen automatically via FormSubmit's _next parameter
 }
 
 // New function to handle form submission and redirect
