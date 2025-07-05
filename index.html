@@ -241,7 +241,7 @@
                     IMPORTANT: Submit this form once to activate FormSubmit.co
                     Check your email (vishwaska1019@gmail.com) for activation link
                     -->
-                    <form class="contact-form" id="contact-form" action="https://formsubmit.co/vishwaska1019@gmail.com" method="POST" target="hidden_iframe">
+                    <form class="contact-form" id="contact-form" action="https://formsubmit.co/vishwaska1019@gmail.com" method="POST" target="hidden_iframe" onsubmit="prepareFormSubmit()">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -272,7 +272,7 @@
                         <!-- Hidden fields for FormSubmit.co -->
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_subject" id="dynamicSubject" value="">
-                        <input type="hidden" name="_next" value="form-status.html?status=success">
+                        <input type="hidden" name="_next" id="redirectUrl" value="">
                         
                         <!-- Alternative: Use Web3Forms (no activation required)
                         Change action to: https://web3forms.com/access/YOUR_ACCESS_KEY
