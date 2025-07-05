@@ -241,7 +241,7 @@
                     IMPORTANT: Submit this form once to activate FormSubmit.co
                     Check your email (vishwaska1019@gmail.com) for activation link
                     -->
-                    <form class="contact-form" id="contact-form" action="https://formsubmit.co/vishwaska1019@gmail.com" method="POST" target="hidden_iframe" onsubmit="prepareForm()">
+                    <form class="contact-form" id="contact-form" onsubmit="handleFormSubmission(event)">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -270,9 +270,7 @@
                         </div>
                         
                         <!-- Hidden fields -->
-                        <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_subject" id="dynamicSubject" value="">
-                        <input type="hidden" name="_next" value="">
                         
                         <!-- Alternative: Use Web3Forms (no activation required)
                         Change action to: https://web3forms.com/access/YOUR_ACCESS_KEY
@@ -282,8 +280,8 @@
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
                     
-                    <div id="successMessage" class="success-message" style="display: none;">✅ Form submitted successfully!</div>
-                    <div id="errorMessage" class="error-message" style="display: none;">❌ There was an error submitting the form. Please try again.</div>
+                    <!-- <div id="successMessage" class="success-message" style="display: none;">✅ Form submitted successfully!</div>
+                    <div id="errorMessage" class="error-message" style="display: none;">❌ There was an error submitting the form. Please try again.</div> -->
                     
                     <iframe name="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
                 </div>
