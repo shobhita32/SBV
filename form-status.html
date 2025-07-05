@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission Status - SBV Associates</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+        }
+        
+        .status-container {
+            max-width: 500px;
+            width: 90%;
+            padding: 3rem 2rem;
+            background: var(--primary-white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 2px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--dark-gold));
+        }
+        
+        .logo-section {
+            margin-bottom: 2rem;
+        }
+        
+        .logo-section img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        
+        .logo-section img:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .logo-section h2 {
+            font-family: var(--font-heading);
+            color: var(--primary-black);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            transition: color 0.3s ease;
+        }
+        
+        .logo-section h2:hover {
+            color: var(--dark-gold);
+        }
+        
+        .logo-section p {
+            color: var(--dark-gold);
+            font-weight: 500;
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        
+        .status-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        
+        .status-icon:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+        
+        .status-icon.success {
+            color: #28a745;
+            animation: bounceIn 0.8s ease-out;
+        }
+        
+        .status-icon.error {
+            color: #dc3545;
+            animation: shake 0.8s ease-out;
+        }
+        
+        .status-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        .status-message.success {
+            color: #155724;
+        }
+        
+        .status-message.error {
+            color: #721c24;
+        }
+        
+        .status-description {
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .btn-return {
+            background: linear-gradient(135deg, var(--primary-black) 0%, #333 100%);
+            color: var(--primary-white);
+            border: 2px solid var(--accent-gold);
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: var(--font-body);
+        }
+        
+        .btn-return:hover {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--dark-gold) 100%);
+            color: var(--primary-black);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+        
+        .btn-return:active {
+            transform: translateY(0);
+        }
+        
+        /* Animations */
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-5px);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translateX(5px);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .status-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .status-icon {
+                font-size: 3rem;
+            }
+            
+            .status-message {
+                font-size: 1.1rem;
+            }
+            
+            .btn-return {
+                padding: 0.9rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .status-container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .logo-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .status-message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-container fade-in">
+        <div class="logo-section">
+            <img src="images/logo.png" alt="SBV Associates Logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <h2 onclick="window.location.href='index.html'" style="cursor: pointer;">SBV Associates</h2>
+            <p><strong>Advocates | Consultants</strong></p>
+        </div>
+        
+        <span class="status-icon" id="statusIcon" onclick="window.location.href='index.html'" style="cursor: pointer;"></span>
+        
+        <div class="status-message" id="statusMessage"></div>
+        
+        <div class="status-description" id="statusDescription"></div>
+        
+        <button class="btn-return" onclick="window.location.href='index.html'">
+            Return to Home
+        </button>
+    </div>
+    
+    <script>
+        // Get status from URL
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get('status');
+        
+        const statusIcon = document.getElementById('statusIcon');
+        const statusMessage = document.getElementById('statusMessage');
+        const statusDescription = document.getElementById('statusDescription');
+        
+        if (status === 'success') {
+            statusIcon.textContent = '✅';
+            statusIcon.className = 'status-icon success';
+            statusMessage.textContent = 'Message Sent Successfully!';
+            statusMessage.className = 'status-message success';
+            statusDescription.textContent = 'Thank you for contacting SBV Associates. Our legal experts will review your inquiry and get back to you within 24 hours. We appreciate your trust in our services.';
+        } else {
+            statusIcon.textContent = '❌';
+            statusIcon.className = 'status-icon error';
+            statusMessage.textContent = 'Submission Error';
+            statusMessage.className = 'status-message error';
+            statusDescription.textContent = 'We encountered an issue while processing your form. Please try again or contact us directly at sid.advocate@outlook.com for immediate assistance.';
+        }
+        
+        // Add some interactive feedback
+        document.querySelector('.btn-return').addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+        
+        document.querySelector('.btn-return').addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    </script>
+</body>
+</html>
