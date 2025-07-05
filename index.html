@@ -241,14 +241,14 @@
                     IMPORTANT: Submit this form once to activate FormSubmit.co
                     Check your email (vishwaska1019@gmail.com) for activation link
                     -->
-                    <form class="contact-form" id="contact-form" onsubmit="handleFormSubmission(event)">
+                    <form class="contact-form" id="contact-form" action="https://formsubmit.co/vishwaska1019@gmail.com" method="POST" target="hidden_iframe">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number*</label>
@@ -269,8 +269,10 @@
                             <textarea id="message" name="message" rows="5" required placeholder="Please provide details about your legal matter..."></textarea>
                         </div>
                         
-                        <!-- Hidden fields -->
+                        <!-- Hidden fields for FormSubmit.co -->
+                        <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_subject" id="dynamicSubject" value="">
+                        <input type="hidden" name="_next" value="form-status.html?status=success">
                         
                         <!-- Alternative: Use Web3Forms (no activation required)
                         Change action to: https://web3forms.com/access/YOUR_ACCESS_KEY
