@@ -1,3 +1,6 @@
+// Configuration Variables
+const FORM_STATUS_PAGE = 'form-status.html';
+
 // Mobile Navigation Toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
@@ -334,16 +337,18 @@ function prepareFormSubmit() {
         // Get current domain and protocol
         const currentUrl = window.location.href;
         const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
-        const redirectPath = baseUrl + '/form-status.html?status=success';
+        let redirectPath = baseUrl + '/' + FORM_STATUS_PAGE + '?status=success';
         
         // OPTIONAL: Override with your production URL when deployed
         // Uncomment and replace with your actual domain:
         // if (window.location.hostname !== 'localhost') {
-        //     redirectPath = 'https://yourdomain.com/form-status.html?status=success';
+        //     redirectPath = 'https://yourdomain.com/' + FORM_STATUS_PAGE + '?status=success';
         // }
         
         redirectUrl.value = redirectPath;
         console.log('Redirect URL set to:', redirectPath);
+        console.log('Current URL:', currentUrl);
+        console.log('Base URL:', baseUrl);
     }
     
     // Show loading state
@@ -352,6 +357,18 @@ function prepareFormSubmit() {
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
     }
+    
+    // Add a fallback redirect mechanism
+    setTimeout(() => {
+        console.log('Setting up fallback redirect...');
+        // If FormSubmit redirect doesn't work, we'll redirect manually after 5 seconds
+        setTimeout(() => {
+            if (window.location.href.indexOf(FORM_STATUS_PAGE) === -1) {
+                console.log('FormSubmit redirect failed, redirecting manually...');
+                window.location.href = FORM_STATUS_PAGE + '?status=success';
+            }
+        }, 5000);
+    }, 1000);
     
     console.log('FormSubmit prepared - allowing form submission');
     return true;
@@ -373,6 +390,12 @@ function handleFormResponse() {
     if (form) {
         form.reset();
     }
+    
+    // Manual redirect as backup (in case FormSubmit redirect doesn't work)
+    console.log('Attempting manual redirect to status page...');
+    setTimeout(() => {
+        window.location.href = FORM_STATUS_PAGE + '?status=success';
+    }, 1000);
     
     // The redirect to form-status.html will happen automatically via FormSubmit's _next parameter
 }
@@ -416,7 +439,7 @@ function handleFormSubmission(event) {
             form.reset();
             
             // Redirect to status page with success parameter
-            window.location.href = 'form-status.html?status=success';
+            window.location.href = FORM_STATUS_PAGE + '?status=success';
         }, 2000);
     } else {
         // Validation failed
