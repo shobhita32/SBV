@@ -246,18 +246,27 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Phone number formatting
+// const phoneInput = document.getElementById('phone');
+// if (phoneInput) {
+//     phoneInput.addEventListener('input', (e) => {
+//         let value = e.target.value.replace(/\D/g, '');
+//         if (value.length >= 6) {
+//             value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+//         } else if (value.length >= 3) {
+//             value = value.replace(/(\d{3})(\d{3})/, '($1) $2');
+//         }
+//         e.target.value = value;
+//     });
+// }
+
 const phoneInput = document.getElementById('phone');
 if (phoneInput) {
     phoneInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length >= 6) {
-            value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-        } else if (value.length >= 3) {
-            value = value.replace(/(\d{3})(\d{3})/, '($1) $2');
-        }
-        e.target.value = value;
+        // Keep only digits
+        e.target.value = e.target.value.replace(/\D/g, '');
     });
 }
+
 
 // Initialize Google Maps (placeholder function)
 // In a real implementation, you would use the Google Maps API

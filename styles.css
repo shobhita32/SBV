@@ -848,9 +848,9 @@ p {
     }
     
     .logo-image {
-        height: 45px;
+        height: 42px;
         margin-right: 0;
-        margin-top: 6px;
+        margin-top: 5px;
     }
     
     .logo h1 {
@@ -923,8 +923,8 @@ p {
     
     /* Improved logo alignment for very small screens */
     .logo-image {
-        height: 55px;
-        margin-top: 8px;
+        height: 47px;
+        margin-top: 15px;
     }
     
     .logo h1 {
@@ -951,7 +951,7 @@ p {
     /* Footer logo for very small screens */
     .footer .logo-image {
         height: 55px;
-        margin-top: 7px;
+        margin-top: 14px;
     }
     
     .footer .logo-text h3 {
