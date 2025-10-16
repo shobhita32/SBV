@@ -545,6 +545,56 @@ p {
     color: var(--text-gray);
 }
 
+/* Team Social Links - Legacy styles removed, using new small layout */
+
+/* Team Name Container */
+.team-name-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.team-name-container h3 {
+    margin: 0 !important;
+    flex: 1;
+}
+
+/* Small LinkedIn Link */
+.linkedin-link-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #0077B5;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.75rem;
+    transition: var(--transition);
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #0077B5;
+    border-radius: 15px;
+    background-color: transparent;
+    min-width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.linkedin-link-small:hover {
+    background-color: #0077B5;
+    color: var(--primary-white);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 119, 181, 0.3);
+}
+
+.linkedin-icon-small {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
 /* Contact Section */
 .contact {
     padding: 80px 0;
@@ -919,6 +969,28 @@ p {
     
     .team-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .linkedin-link {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .linkedin-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .linkedin-link-small {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        min-width: 28px;
+        height: 28px;
+    }
+    
+    .linkedin-icon-small {
+        width: 12px;
+        height: 12px;
     }
     
     /* Improved logo alignment for very small screens */
